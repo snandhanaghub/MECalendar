@@ -1,0 +1,69 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  /* Hide scrollbar while keeping scroll functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.App {
+  min-height: 100vh;
+  background: #2b2d42;
+  color: white;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Fix Hero section issues */
+.hero {
+  min-height: 100vh !important;
+  height: 100vh !important;
+  width: 100% !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.hero-container {
+  width: 100% !important;
+  min-height: 100vh !important;
+  height: 100vh !important;
+  display: flex !important;
+}
+
+.hero-left {
+  min-height: 100vh !important;
+  height: 100vh !important;
+  width: 53% !important;
+  flex: none !important;
+}
+
+.hero-right {
+  min-height: 100vh !important;
+  height: 100vh !important;
+  width: 47% !important;
+  flex: none !important;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #2b2d42;
+  color: white;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

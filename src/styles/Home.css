@@ -1,0 +1,71 @@
+.home-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-content {
+  flex: 1;
+  padding-top: 80px; /* Account for fixed navbar */
+}
+
+.home-hero {
+  background: linear-gradient(135deg, #2b2d42 0%, #1e2139 100%);
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.home-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.home-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.025em;
+}
+
+.home-subtitle {
+  font-size: 1.25rem;
+  color: #8d99ae;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .home-hero {
+    padding: 3rem 0;
+  }
+  
+  .home-hero-content {
+    padding: 0 1rem;
+  }
+  
+  .home-title {
+    font-size: 2.5rem;
+  }
+  
+  .home-subtitle {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-hero {
+    padding: 2rem 0;
+  }
+  
+  .home-title {
+    font-size: 2rem;
+  }
+  
+  .home-subtitle {
+    font-size: 1rem;
+  }
+}

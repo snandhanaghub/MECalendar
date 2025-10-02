@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: transparent;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 1rem 0;
+}
+
+.navbar.scrolled {
+  background: rgba(43, 45, 66, 1);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.7rem 0;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 4rem;
+  gap: 3rem;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  margin-left: -6rem;
+}
+
+.navbar-logo:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.me-calendar-container {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  position: relative;
+}
+
+.me-calendar-image {
+  height: 26px;
+  width: 26px;
+  transition: all 0.3s ease;
+}
+
+.me-calendar-image:hover {
+  transform: scale(1.05);
+}
+
+.me-calendar-text {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.1em;
+}
+
+.me-text {
+  color: #ffffff;
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+.calendar-text {
+  color: #ef233c;
+  position: relative;
+  background: linear-gradient(135deg, #ef233c 0%, #ff4757 50%, #d80032 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 900;
+}
+
+
+
+
+
+
+
+.navbar-links {
+  display: flex;
+  gap: 7rem;
+  align-items: center;
+  position: absolute;
+  left: 76.5%;
+  transform: translateX(-50%);
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  font-family: 'Orbitron', 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, 
+    #ffffff 0%, 
+    #fd5252 15%, 
+    #3db4ac 35%, 
+    #3795aa 55%, 
+    #5baa85 75%, 
+    #f2d166 95%, 
+    #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 400% 100%;
+  animation: gradientShift 4s ease-in-out infinite;
+  text-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.2),
+    0 0 30px rgba(255, 107, 107, 0.1),
+    0 0 45px rgba(78, 205, 196, 0.05);
+}
+
+.nav-link:hover {
+  transform: translateY(-1px);
+  animation-duration: 2s;
+  text-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.4),
+    0 0 40px rgba(255, 107, 107, 0.2),
+    0 0 60px rgba(78, 205, 196, 0.1);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ef233c, #ff6b6b, #4ecdc4, #45b7d1);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  box-shadow: 
+    0 0 10px rgba(239, 35, 60, 0.3),
+    0 0 20px rgba(255, 107, 107, 0.2);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  animation: glowPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 50%;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    transform: scaleX(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scaleX(1.2);
+    opacity: 1;
+  }
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #2b2d42;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #444;
+  transition: color 0.3s ease;
+}
+
+.mobile-nav-link:hover {
+  color: #ef233c;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .navbar-container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .me-calendar-text {
+    font-size: 1.25rem;
+  }
+
+  .me-calendar-image {
+    height: 18px;
+    width: 18px;
+  }
+}
