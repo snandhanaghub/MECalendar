@@ -34,8 +34,6 @@
 }
 	/* tighter vertical padding so card feels more compact */
 	padding: 1rem 2.5rem;
-	/* ensure the auth card has a taller vertical presence on desktop */
-	min-height: 540px;
 	box-shadow: 
 		0 25px 50px rgba(0, 0, 0, 0.3),
 		0 0 0 1px rgba(255, 255, 255, 0.05);
@@ -401,8 +399,6 @@ select::-ms-expand { display: none; }
   
 	.login-card {
 		padding: 1rem 1rem;
-		/* reduce min-height on tablet/mobile to avoid oversized cards */
-		min-height: 420px;
 	}
   
 	.login-header h1 {
@@ -430,7 +426,6 @@ select::-ms-expand { display: none; }
   
 	.login-card {
 		padding: 0.75rem;
-		min-height: 380px;
 	}
 }
 

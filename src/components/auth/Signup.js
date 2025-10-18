@@ -55,6 +55,15 @@ const Signup = () => {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1200));
       // Mock sign up success
+      // persist a simple user profile so Profile page can read it
+      const user = {
+        name: formData.fullName,
+        email: formData.email,
+        year: formData.year,
+        class: formData.class
+      };
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('role', 'student');
       localStorage.setItem('isAuthenticated', 'true');
       navigate('/homepage');
     } catch (err) {

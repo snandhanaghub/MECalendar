@@ -1,0 +1,193 @@
+/* Basic layout for homepage/dashboard */
+:root {
+  --navy: #2b2d42; /* navy variant used across event action buttons */
+}
+/* Import Poppins for the logo */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
+.home-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f1724 0%, #101827 50%, #0b1220 100%);
+  color: #fff;
+}
+
+.cp-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 220px;
+  background: rgba(255,255,255,0.03);
+  padding: 1.25rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-top { padding-left: 0.75rem; }
+.logo { font-weight: 800; color: #ef233c; text-decoration: none; font-size: 1.25rem; display: inline-flex; align-items: center; gap: 0; padding: 0.6rem 0.75rem; border-radius: 8px; }
+.logo .me { font-size: 1.50rem; font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; font-weight: 800; }
+.logo .calendar { font-size: 1.50rem; font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; font-weight: 700; }
+.logo .me { color: #ef233c; }
+.logo .calendar { color: #ffffff; }
+.sidebar-nav { display:flex; flex-direction: column; gap: 0.5rem; padding-left: 0.75rem; }
+.sidebar-link { color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 0.6rem; border-radius: 8px; background: transparent; border: none; display: block; width: 100%; text-align: left; }
+.sidebar-link:hover { background: rgba(255,255,255,0.02); }
+.sidebar-bottom { margin-top: auto; padding-left: 0.75rem; }
+.sidebar-bottom { padding: 0.75rem; }
+
+.home-main { padding: 1rem 2rem; max-width: 1200px; margin: 0 auto; margin-left: 240px; }
+
+.home-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.home-controls { margin-bottom: 1rem; }
+.search-row { display: flex; gap: 1rem; align-items: center; }
+.search-input { flex: 1; padding: 0.5rem 0.75rem; border-radius: 8px; border: none; background: rgba(255,255,255,0.04); color: white; }
+.filters select { margin-left: 0.5rem; padding: 0.45rem 0.6rem; border-radius: 8px; background: rgba(255,255,255,0.03); color: white; border: none; }
+
+.events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.event-card { background: rgba(255,255,255,0.03); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+.event-poster img { width: 100%; height: 160px; object-fit: cover; }
+.poster-placeholder { height: 160px; display:flex; align-items:center; justify-content:center; color: rgba(255,255,255,0.5); }
+.event-body { padding: 1rem; display:flex; flex-direction:column; gap:0.5rem; }
+.event-title { margin:0; }
+.event-desc { margin:0; opacity:0.85; font-size:0.95rem; }
+.event-meta { display:flex; gap:0.6rem; font-size:0.85rem; opacity:0.8; }
+.event-tags { display:flex; gap:0.4rem; margin-top:0.5rem; }
+.badge-red { background: #ef233c; padding: 0.25rem 0.5rem; border-radius:999px; color:white; font-size:0.8rem; }
+.event-actions { margin-top: auto; display:flex; justify-content:flex-end; }
+.btn { background: rgba(255,255,255,0.06); padding:0.5rem 0.9rem; border-radius:8px; color:white; text-decoration:none; }
+
+.no-events { padding:2rem; text-align:center; opacity:0.8; }
+
+/* Event Details specific styles */
+.event-details { max-width: 1400px; width: calc(100% - 260px); margin: 1.5rem auto; margin-left: 240px; padding: 1.25rem; display: flex; gap: 1.25rem; color: #fff; }
+.event-details.empty { margin-left: 240px; padding: 2rem; }
+.event-banner { flex: 1 1 50%; background: rgba(255,255,255,0.02); border-radius: 12px; overflow: hidden; display:flex; align-items:center; justify-content:center; }
+.event-banner img { width: 100%; height: auto; max-height: 930px; object-fit: contain; display:block; }
+.poster-placeholder.large { height: 600px; display:flex; align-items:center; justify-content:center; color: rgba(255,255,255,0.45); font-size: 1.7rem; }
+.event-meta-card { flex: 1 1 50%; background: #ffffff; padding: 2rem 1.75rem; border-radius: 12px; min-height: 650px; color: #111827; }
+.event-meta-card { display: flex; flex-direction: column; }
+.event-meta-card h2 { margin: 0 0 0.25rem 0; font-size: 1.7rem; }
+.event-meta-card .muted { font-size: 1rem; color: rgba(17,24,39,0.6); }
+.event-desc { font-size: 1.05rem; line-height: 1.5; }
+.event-info { gap: 0.5rem; }
+.event-actions { margin-top: 18px; }
+.event-meta-card .muted { color: rgba(17,24,39,0.6); font-weight: 500; font-size: 0.95rem; }
+.event-info { display:flex; flex-direction:column; gap: 0.25rem; opacity: 0.95; color: #111827; }
+.event-meta-card .event-actions { display:flex; gap:0.6rem; flex-wrap:wrap; margin-top: 12px; margin-left: 0; }
+.event-meta-card .event-actions { margin-top: auto; }
+/* Make action buttons equal width */
+.event-meta-card .event-actions .btn {
+  flex: 1 1 0;
+  min-width: 140px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.event-meta-card .event-actions a.btn,
+.event-meta-card .event-actions button.btn {
+  /* ensure anchors and buttons behave the same */
+  padding: 0.6rem 0.9rem;
+}
+/* Normalize typography for action buttons in details card */
+.event-meta-card .event-actions .btn {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.event-meta-card .event-actions .btn .icon { /* if icons are added later, keep spacing */
+  margin-right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Stronger normalization to override any variant-specific rules */
+.event-meta-card .event-actions a.btn,
+.event-meta-card .event-actions button.btn,
+.event-meta-card .event-actions .btn-register,
+.event-meta-card .event-actions .btn-approve,
+.event-meta-card .event-actions .btn-reject {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  font-family: inherit;
+  text-transform: none;
+}
+
+/* Very specific override for register to ensure parity */
+.event-meta-card .event-actions a.btn.btn-register {
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+}
+
+/* ensure anchors look like buttons consistently */
+.event-meta-card .event-actions a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn { background: rgba(255,255,255,0.06); padding:0.5rem 0.9rem; border-radius:8px; color:white; text-decoration:none; border: none; cursor: pointer; }
+.btn[disabled] { opacity: 0.6; cursor: default; }
+.btn-approve { background: var(--navy); color: #fff; }
+.btn-reject { background: var(--navy); color: #fff; }
+.btn-register { background: var(--navy); color: #fff; }
+.btn-approve:hover, .btn-reject:hover, .btn-register:hover { background: #ef233c; color: #fff; }
+
+/* Strong override: make action buttons inside the event details card navy and hover red */
+.event-meta-card .event-actions .btn {
+  background: var(--navy) !important;
+  color: #fff !important;
+}
+.event-meta-card .event-actions .btn:hover {
+  background: #ef233c !important;
+}
+
+/* Final authoritative override for event details action buttons
+   Ensures navy default, red hover, and removes any background-image/gradient
+   that other CSS files might be applying. Kept very specific to avoid
+   affecting .btn elsewhere. */
+.event-details .event-meta-card .event-actions .btn,
+.event-details .event-meta-card .event-actions a.btn,
+.event-details .event-meta-card .event-actions button.btn,
+.event-details .event-meta-card .event-actions .btn-register,
+.event-details .event-meta-card .event-actions .btn-approve,
+.event-details .event-meta-card .event-actions .btn-reject {
+  background: var(--navy) !important;
+  color: #fff !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.event-details .event-meta-card .event-actions .btn:hover,
+.event-details .event-meta-card .event-actions a.btn:hover,
+.event-details .event-meta-card .event-actions button.btn:hover,
+.event-details .event-meta-card .event-actions .btn-register:hover,
+.event-details .event-meta-card .event-actions .btn-approve:hover,
+.event-details .event-meta-card .event-actions .btn-reject:hover {
+  background: #ef233c !important;
+  color: #fff !important;
+}
+
+@media (max-width: 900px) {
+  .event-details { flex-direction: column; margin-left: 0; padding: 1rem; }
+  .event-banner { order: 0; }
+  .event-banner img { max-height: 560px; }
+  .poster-placeholder.large { height: 450px; }
+  .event-meta-card { order: 1; min-height: auto; }
+}
+
+@media (max-width: 900px) { .events-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 800px) {
+  .events-grid { grid-template-columns: 1fr; }
+  .cp-sidebar { position: relative; width: 100%; height: auto; flex-direction: row; align-items: center; padding: 0.75rem 1rem; }
+  .sidebar-nav { flex-direction: row; gap: 1rem; padding-left: 0; }
+  .home-main { margin-left: 0; padding: 1rem; }
+}
+
+/* Profile styles were moved to styles/profile/Profile.css */

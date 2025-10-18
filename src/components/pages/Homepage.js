@@ -1,48 +1,76 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
+// routing Link not needed in this file
+import EventCard from '../common/EventCard';
+import '../../styles/Home.css';
+import DUMMY_EVENTS from '../../data/events';
 
 const Homepage = () => {
+  const [query, setQuery] = useState('');
+  const [filterTag, setFilterTag] = useState('');
+  const [sortBy, setSortBy] = useState('date');
+
+  const tags = ['Sports', 'Cultural', 'Technical', 'Workshop', 'Fest'];
+
+  const events = useMemo(() => {
+    let list = DUMMY_EVENTS.slice();
+    if (query.trim()) {
+      const q = query.toLowerCase();
+      list = list.filter(e => (
+        e.name.toLowerCase().includes(q) ||
+        e.organizer.toLowerCase().includes(q) ||
+        e.tags.join(' ').toLowerCase().includes(q)
+      ));
+    }
+    if (filterTag) {
+      list = list.filter(e => e.tags.includes(filterTag));
+    }
+    if (sortBy === 'popularity') {
+      list.sort((a, b) => b.popularity - a.popularity);
+    } else if (sortBy === 'latest') {
+      list.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else { // date
+      list.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+    return list;
+  }, [query, filterTag, sortBy]);
+
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #2b2d42 0%, #1a1a2e 50%, #16213e 100%)',
-      color: 'white',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'column',
-      gap: '2rem',
-      padding: '2rem'
-    }}>
-      <h1 style={{ 
-        fontSize: '3rem', 
-        fontWeight: '700',
-        background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-        backgroundClip: 'text',
-        textAlign: 'center'
-      }}>
-        Welcome to MECalendar Dashboard!
-      </h1>
-      <p style={{ 
-        fontSize: '1.2rem', 
-        opacity: 0.8,
-        textAlign: 'center',
-        maxWidth: '600px'
-      }}>
-        You have successfully logged in. This is your dashboard where you can manage events, view your calendar, and more.
-      </p>
-      <div style={{
-        background: 'rgba(239, 35, 60, 0.1)',
-        border: '1px solid rgba(239, 35, 60, 0.3)',
-        padding: '1rem 2rem',
-        borderRadius: '12px',
-        backdropFilter: 'blur(10px)'
-      }}>
-        <p style={{ margin: 0, color: '#ef233c', fontWeight: '600' }}>
-          Dashboard features coming soon!
-        </p>
-      </div>
+    <div className="home-page">
+
+      <main className="home-main">
+        <h1 className="home-title">Home</h1>
+        <section className="home-controls">
+          <div className="search-row">
+            <input
+              className="search-input"
+              placeholder="Search by name, organizer or tags"
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+            />
+            <div className="filters">
+              <select value={filterTag} onChange={e => setFilterTag(e.target.value)}>
+                <option value="">All Tags</option>
+                {tags.map(t => <option key={t} value={t}>{t}</option>)}
+              </select>
+
+              <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
+                <option value="date">Sort: Date</option>
+                <option value="popularity">Sort: Popularity</option>
+                <option value="latest">Sort: Latest</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section className="events-grid">
+          {events.map(ev => (
+            <EventCard key={ev.id} event={ev} />
+          ))}
+          {events.length === 0 && (
+            <div className="no-events">No events found</div>
+          )}
+        </section>
+      </main>
     </div>
   );
 };

@@ -63,6 +63,12 @@ const Login = () => {
       
       // Mock authentication - in real app, this would be an API call
       if (formData.email && formData.password) {
+        // ensure a minimal user profile exists
+        const existing = JSON.parse(localStorage.getItem('user') || 'null');
+        if (!existing) {
+          localStorage.setItem('user', JSON.stringify({ name: formData.email.split('@')[0], email: formData.email }));
+        }
+        localStorage.setItem('role', localStorage.getItem('role') || 'student');
         localStorage.setItem('isAuthenticated', 'true');
         navigate('/homepage');
       }
