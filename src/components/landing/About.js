@@ -87,44 +87,7 @@ const About = () => {
           </div>
         </div>
         
-        <div style={{ 
-          marginTop: '4rem',
-          padding: '3rem',
-          background: 'linear-gradient(135deg, #ef233c, #ff4757)',
-          borderRadius: '20px',
-          color: 'white',
-          boxShadow: '0 15px 50px rgba(239, 35, 60, 0.3)'
-        }}>
-          <h3 style={{ 
-            fontSize: '2.2rem', 
-            marginBottom: '1.5rem', 
-            fontWeight: 800
-          }}>Join Our Community</h3>
-          <p style={{ 
-            fontSize: '1.2rem', 
-            marginBottom: '2rem',
-            opacity: 0.9,
-            lineHeight: '1.6'
-          }}>
-            Connect with 4000+ students, explore 100+ events, and be part of 15+ active clubs. 
-            Your college experience starts here!
-          </p>
-          <button style={{
-            background: 'white',
-            color: '#ef233c',
-            border: 'none',
-            padding: '1rem 2.5rem',
-            borderRadius: '12px',
-            fontSize: '1rem',
-            fontWeight: '700',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em'
-          }}>
-            Get Started Today
-          </button>
-        </div>
+
       </div>
     </section>
   );

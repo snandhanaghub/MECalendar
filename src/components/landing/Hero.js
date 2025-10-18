@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Globe, Facebook, Twitter, Linkedin, Drama, Monitor, Trophy, Target } from 'lucide-react';
-import '../../styles/Hero.css';
+import '../../styles/landing/Hero.css';
 
 const Hero = () => {
   return (
@@ -46,8 +47,8 @@ const Hero = () => {
               </div>
             </div>
             <div className="hero-buttons">
-              <button className="hero-login">Log In</button>
-              <button className="hero-signup">Sign Up</button>
+              <Link to="/login" className="hero-login">Log In</Link>
+              <Link to="/signup" className="hero-signup">Sign Up</Link>
             </div>
           </div>
         </div>
