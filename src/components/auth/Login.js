@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
-import '../../styles/auth/Login.css';
+import '../../styles/auth/Auth.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({

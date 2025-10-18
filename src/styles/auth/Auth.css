@@ -1,0 +1,479 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.login-container {
+	min-height: 100vh;
+	background: linear-gradient(135deg, #2b2d42 0%, #1a1a2e 50%, #16213e 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem;
+	font-family: 'Inter', sans-serif;
+}
+
+.login-wrapper {
+	width: 100%;
+	/* increased max width to make signup/login forms roomier */
+	max-width: 720px;
+	position: relative;
+}
+
+.login-card {
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(20px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 24px;
+
+/* two-column row: keep inner form-group spacing identical to top-level groups */
+.auth-container .form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.auth-container .form-row .form-group {
+  margin-bottom: 1rem; /* same as .form-group spacing */
+}
+	/* tighter vertical padding so card feels more compact */
+	padding: 1rem 2.5rem;
+	/* ensure the auth card has a taller vertical presence on desktop */
+	min-height: 540px;
+	box-shadow: 
+		0 25px 50px rgba(0, 0, 0, 0.3),
+		0 0 0 1px rgba(255, 255, 255, 0.05);
+	position: relative;
+	overflow: hidden;
+}
+
+.login-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: linear-gradient(90deg, transparent, rgba(239, 35, 60, 0.5), transparent);
+}
+
+.login-header {
+	text-align: center;
+	/* tighten header spacing */
+	margin-bottom: 1rem;
+}
+
+.login-header h1 {
+	color: white;
+	font-size: 2.2rem;
+	font-weight: 700;
+	margin-bottom: 0;
+	font-family: 'Poppins', sans-serif;
+	background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.login-header p {
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 1rem;
+	font-weight: 400;
+	margin-top: 0.1rem;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	/* reduced gap so label and control sit closer */
+	gap: 0.25rem;
+}
+
+.form-group label {
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 0.9rem;
+	font-weight: 500;
+	/* reduce label bottom spacing for a tighter form */
+	margin-bottom: 0.25rem;
+}
+
+.input-wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.input-wrapper input,
+.input-wrapper select {
+	width: 100%;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 12px;
+	padding: 1rem 1rem 1rem 3rem;
+	color: white;
+	font-size: 1rem;
+	transition: all 0.3s ease;
+	backdrop-filter: blur(10px);
+}
+
+/* prettier select for signup (custom caret, padding, consistent with inputs) */
+.signup-select {
+	/* remove native arrow */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.04);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 12px;
+	padding: 1rem 3rem 1rem 3rem; /* left padding leaves room for input icon */
+	color: #fff;
+	font-size: 1rem;
+	transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+	background-repeat: no-repeat;
+	background-position: right 1rem center;
+	background-size: 14px;
+	cursor: pointer;
+	box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+
+.signup-select:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+}
+
+.signup-select:focus {
+	outline: none;
+	border-color: #ef233c;
+	box-shadow: 0 8px 26px rgba(239, 35, 60, 0.12);
+}
+
+/* show error state if validation fails */
+.signup-select.error {
+	border-color: #ff6b6b;
+	box-shadow: 0 8px 26px rgba(255,107,107,0.12);
+}
+
+/* hide native caret in IE/Edge */
+select::-ms-expand { display: none; }
+
+/* options styling (limited by browser support) */
+.signup-select option {
+	color: #111;
+	background: #fff;
+}
+
+/* Modern non-native custom dropdown styling */
+.custom-select-wrapper {
+	position: relative;
+	width: 100%;
+}
+
+.custom-select-trigger {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	background: rgba(255,255,255,0.03);
+	border: 1px solid rgba(255,255,255,0.06);
+	padding: 0.9rem 1rem 0.9rem 3rem; /* leave room for left icon */
+	border-radius: 12px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.custom-select-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.custom-select-caret { opacity: 0.9; margin-left: 0.5rem; }
+
+.custom-select-list {
+	position: absolute;
+	z-index: 60;
+	left: 0;
+	right: 0;
+	margin-top: 0.45rem;
+	background: rgba(6, 10, 18, 0.98); /* dark panel */
+	border: 1px solid rgba(255,255,255,0.03);
+	border-radius: 12px;
+	box-shadow: 0 18px 48px rgba(2,6,23,0.5);
+	max-height: 260px;
+	overflow: auto;
+	padding: 0.25rem;
+	-webkit-overflow-scrolling: touch;
+}
+
+.custom-select-item {
+	padding: 0.7rem 1rem;
+	border-radius: 8px;
+	cursor: pointer;
+	color: rgba(255,255,255,0.95);
+	margin: 0.12rem 0;
+	transition: background-color 120ms ease, transform 120ms ease;
+	user-select: none;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.custom-select-item:hover,
+.custom-select-item.highlight {
+	background: linear-gradient(90deg, rgba(239,35,60,0.10), rgba(239,35,60,0.06));
+	transform: translateY(-1px);
+}
+
+.custom-select-item.selected {
+	background: linear-gradient(90deg, rgba(239,35,60,0.16), rgba(239,35,60,0.08));
+	font-weight: 600;
+}
+
+/* nicer thin scrollbar */
+.custom-select-list::-webkit-scrollbar { width: 8px; }
+.custom-select-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 6px; }
+
+
+
+
+.input-wrapper input:focus,
+.input-wrapper select:focus {
+	outline: none;
+	border-color: #ef233c;
+	box-shadow: 0 0 0 3px rgba(239, 35, 60, 0.1);
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.input-wrapper input.error,
+.input-wrapper select.error {
+	border-color: #ff6b6b;
+	box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.input-wrapper input::placeholder {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.input-icon {
+	position: absolute;
+	left: 1rem;
+	color: rgba(255, 255, 255, 0.6);
+	z-index: 2;
+	pointer-events: none;
+}
+
+.password-toggle {
+	position: absolute;
+	right: 1rem;
+	background: none;
+	border: none;
+	color: rgba(255, 255, 255, 0.6);
+	cursor: pointer;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: color 0.3s ease;
+	z-index: 2;
+}
+
+.password-toggle:hover {
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.error-message {
+	color: #ff6b6b;
+	font-size: 0.85rem;
+	/* smaller top margin to keep error text close to input */
+	margin-top: 0.15rem;
+	display: block;
+}
+
+.form-options {
+	display: flex;
+	justify-content: flex-end;
+	/* tighten vertical spacing above the forgot-password link */
+	margin: -0.2rem 0 0.25rem 0;
+}
+
+.forgot-password {
+	color: #ef233c;
+	text-decoration: none;
+	font-size: 0.9rem;
+	font-weight: 500;
+	transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+	color: #ff4757;
+	text-decoration: underline;
+}
+
+.login-button {
+	background: linear-gradient(135deg, #ef233c 0%, #d63031 100%);
+	color: white;
+	border: none;
+	border-radius: 12px;
+	padding: 1rem 2rem;
+	font-size: 1.1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+	/* reduced spacing between the button and the elements above */
+	margin-top: 0.5rem;
+	font-family: 'Poppins', sans-serif;
+	min-height: 56px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-button:hover:not(:disabled) {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 25px rgba(239, 35, 60, 0.3);
+	background: linear-gradient(135deg, #ff4757 0%, #ef233c 100%);
+}
+
+.login-button:active:not(:disabled) {
+	transform: translateY(0);
+}
+
+.login-button:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+.loading-spinner {
+	width: 24px;
+	height: 24px;
+	border: 3px solid rgba(255, 255, 255, 0.3);
+	border-top: 3px solid white;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.submit-error {
+	background: rgba(255, 107, 107, 0.1);
+	border: 1px solid rgba(255, 107, 107, 0.3);
+	color: #ff6b6b;
+	padding: 0.75rem;
+	border-radius: 8px;
+	font-size: 0.9rem;
+	text-align: center;
+}
+
+.signup-link {
+ 	text-align: center;
+ 	/* bring the signup prompt closer to the button */
+ 	margin-top: 1rem;
+ 	color: rgba(255, 255, 255, 0.7);
+ 	font-size: 0.95rem;
+}
+
+.signup-link a {
+	color: #ef233c;
+	text-decoration: none;
+	font-weight: 600;
+	margin-left: 0.25rem;
+	transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+	color: #ff4757;
+	text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.login-container {
+		padding: 1rem;
+	}
+  
+	.login-card {
+		padding: 1rem 1rem;
+		/* reduce min-height on tablet/mobile to avoid oversized cards */
+		min-height: 420px;
+	}
+  
+	.login-header h1 {
+		font-size: 1.8rem;
+	}
+  
+	.input-wrapper input,
+	.input-wrapper select {
+		padding: 0.875rem 0.875rem 0.875rem 2.75rem;
+	}
+  
+	.input-icon {
+		left: 0.875rem;
+	}
+  
+	.password-toggle {
+		right: 0.875rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.login-header h1 {
+		font-size: 1.6rem;
+	}
+  
+	.login-card {
+		padding: 0.75rem;
+		min-height: 380px;
+	}
+}
+
+/* Focus states for accessibility */
+.login-button:focus-visible {
+	outline: 2px solid #ef233c;
+	outline-offset: 2px;
+}
+
+.password-toggle:focus-visible {
+	outline: 2px solid #ef233c;
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+/* Animation for form elements */
+.form-group {
+	animation: slideUp 0.6s ease forwards;
+	opacity: 0;
+	transform: translateY(20px);
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.login-button { 
+	animation: slideUp 0.6s ease forwards;
+	animation-delay: 0.4s;
+	opacity: 0;
+	transform: translateY(20px);
+}
+.signup-link { 
+	animation: slideUp 0.6s ease forwards;
+	animation-delay: 0.5s;
+	opacity: 0;
+	transform: translateY(20px);
+}
+
+@keyframes slideUp {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Login-specific overrides (empty) */

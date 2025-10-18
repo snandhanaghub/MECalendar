@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, Clock, Send } from 'lucide-react';
+import { Mail, Phone, Clock, Send, MapPin } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -38,13 +38,19 @@ const Contact = () => {
           alignItems: 'start'
         }}>
           {/* Contact Information */}
-          <div>
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.05)',
+            padding: '2.5rem',
+            borderRadius: '15px',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)'
+          }}>
             <h3 style={{ 
               fontSize: '2rem', 
               marginBottom: '2rem', 
               color: '#ef233c',
               fontWeight: 700
-            }}>Contact Information</h3>
+            }}>Our College</h3>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -62,7 +68,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.25rem' }}>Email</h4>
-                  <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.95rem' }}>info@mecalendar.edu</p>
+                  <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.95rem' }}>principal@mec.ac.in</p>
                 </div>
               </div>
               
@@ -96,26 +102,21 @@ const Contact = () => {
                   justifyContent: 'center',
                   border: '1px solid rgba(239, 35, 60, 0.3)'
                 }}>
-                  <Clock size={24} color="#ef233c" />
+                  <MapPin size={24} color="#ef233c" />
                 </div>
                 <div>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.25rem' }}>Office Hours</h4>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.25rem' }}>Address</h4>
                   <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.95rem' }}>
-                    Mon - Fri: 9:00 AM - 5:00 PM<br />
-                    Sat: 9:00 AM - 2:00 PM
+                    Model Engineering College<br />
+                    Thrikkakara, Ernakulam<br />
+                    Kerala 682021, India
                   </p>
                 </div>
               </div>
             </div>
             
-            {/* Google Maps */}
+            {/* College Map */}
             <div style={{ marginTop: '2rem' }}>
-              <h4 style={{ 
-                fontSize: '1.5rem', 
-                fontWeight: '600', 
-                marginBottom: '1rem',
-                color: '#ef233c'
-              }}>Our Location</h4>
               <div style={{
                 background: 'rgba(255, 255, 255, 0.1)',
                 padding: '1rem',
@@ -145,7 +146,7 @@ const Contact = () => {
                   }}
                 >
                   <img
-                    src="https://maps.googleapis.com/maps/api/staticmap?center=10.0147764,76.343114&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:M%7C10.0147764,76.343114&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dF8XS4dS2_Vbhw&style=feature:administrative%7Celement:geometry%7Ccolor:0x2b2d42&style=feature:administrative%7Celement:labels.text.fill%7Ccolor:0xffffff&style=feature:landscape%7Celement:all%7Ccolor:0x1a1c2e&style=feature:poi%7Celement:all%7Cvisibility:off&style=feature:road%7Celement:all%7Csaturation:-100%7Clightness:45&style=feature:road.highway%7Celement:all%7Cvisibility:simplified&style=feature:road.arterial%7Celement:labels.icon%7Cvisibility:off&style=feature:transit%7Celement:all%7Cvisibility:off&style=feature:water%7Celement:all%7Ccolor:0x46bcec%7Cvisibility:on"
+                    src="/assets/clgmap.png"
                     alt="Model Engineering College Location - Click to open in Google Maps"
                     style={{
                       width: '100%',
@@ -155,6 +156,30 @@ const Contact = () => {
                     }}
                   />
                 </a>
+              </div>
+            </div>
+            
+            {/* Office Hours - After Map */}
+            <div style={{ marginTop: '2rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div style={{
+                  width: '50px',
+                  height: '50px',
+                  background: 'rgba(239, 35, 60, 0.1)',
+                  borderRadius: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid rgba(239, 35, 60, 0.3)'
+                }}>
+                  <Clock size={24} color="#ef233c" />
+                </div>
+                <div>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.25rem' }}>Office Hours</h4>
+                  <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.95rem' }}>
+                    Mon - Fri: 9:00 AM - 5:00 PM
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -229,7 +254,7 @@ const Contact = () => {
               />
               
               <textarea 
-                rows="5" 
+                rows="10" 
                 placeholder="Your Message"
                 style={{
                   padding: '1rem',
@@ -239,7 +264,8 @@ const Contact = () => {
                   color: 'white',
                   fontSize: '1rem',
                   resize: 'vertical',
-                  fontFamily: 'inherit'
+                  fontFamily: 'inherit',
+                  minHeight: '377px'
                 }}
               />
               

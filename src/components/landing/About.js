@@ -26,7 +26,7 @@ const About = () => {
             margin: '0 auto',
             lineHeight: '1.6'
           }}>
-            Your ultimate companion for navigating college life at Model Engineering College
+            Your ultimate companion for navigating college life at MEC
           </p>
         </div>
         
