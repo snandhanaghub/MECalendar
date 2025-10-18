@@ -56,23 +56,28 @@ const Login = () => {
     }
 
     setIsLoading(true);
-    
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Mock authentication - in real app, this would be an API call
-      if (formData.email && formData.password) {
-        // ensure a minimal user profile exists
-        const existing = JSON.parse(localStorage.getItem('user') || 'null');
-        if (!existing) {
-          localStorage.setItem('user', JSON.stringify({ name: formData.email.split('@')[0], email: formData.email }));
-        }
-        localStorage.setItem('role', localStorage.getItem('role') || 'student');
-        localStorage.setItem('isAuthenticated', 'true');
-        navigate('/homepage');
+      const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.email, password: formData.password })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setErrors({ submit: data.error || 'Login failed. Please try again.' });
+        return;
       }
+
+      const { user, token } = data;
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', user.role || 'student');
+      localStorage.setItem('isAuthenticated', 'true');
+      navigate('/homepage');
     } catch (error) {
+      console.error(error);
       setErrors({ submit: 'Login failed. Please try again.' });
     } finally {
       setIsLoading(false);

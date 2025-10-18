@@ -49,24 +49,43 @@ const Signup = () => {
       setErrors(newErrors);
       return;
     }
+    // enforce college domain on client as well
+    const allowedDomain = '@mec.ac.in';
+    if (!formData.email.toLowerCase().endsWith(allowedDomain)) {
+      setErrors({ email: `Only ${allowedDomain} email addresses are allowed` });
+      return;
+    }
 
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1200));
-      // Mock sign up success
-      // persist a simple user profile so Profile page can read it
-      const user = {
-        name: formData.fullName,
-        email: formData.email,
-        year: formData.year,
-        class: formData.class
-      };
+      const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const res = await fetch(`${API_BASE}/api/auth/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          year: formData.year,
+          class: formData.class,
+          password: formData.password
+        })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setErrors({ submit: data.error || 'Sign up failed. Please try again.' });
+        return;
+      }
+
+      // success
+      const { user, token } = data;
       localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('role', 'student');
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', user.role || 'student');
       localStorage.setItem('isAuthenticated', 'true');
       navigate('/homepage');
     } catch (err) {
+      console.error(err);
       setErrors({ submit: 'Sign up failed. Please try again.' });
     } finally {
       setIsLoading(false);

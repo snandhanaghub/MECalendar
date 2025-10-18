@@ -22,14 +22,22 @@ const RoleTransferModal = ({ open, onClose, onTransfer }) => {
 
 const DefineRoleModal = ({ open, onClose, onDefine }) => {
   const [otp, setOtp] = useState('');
+  const [selectedRole, setSelectedRole] = useState('cr');
   if (!open) return null;
   return (
     <div className="modal">
       <div className="modal-inner">
         <h3>Define Role (enter OTP)</h3>
-        <input placeholder="OTP" value={otp} onChange={e=>setOtp(e.target.value)} />
+        <div style={{display:'flex', gap:8}}>
+          <select value={selectedRole} onChange={e => setSelectedRole(e.target.value)}>
+            <option value="cr">Class Representative</option>
+            <option value="clubrep">Club Representative</option>
+            <option value="collegerep">College Representative</option>
+          </select>
+          <input placeholder="OTP" value={otp} onChange={e=>setOtp(e.target.value)} />
+        </div>
         <div style={{marginTop:12}}>
-          <button className="btn" onClick={() => { onDefine(otp); setOtp(''); }}>Confirm</button>
+          <button className="btn" onClick={() => { onDefine(otp, selectedRole); setOtp(''); }}>Confirm</button>
           <button className="btn" onClick={onClose} style={{marginLeft:8}}>Cancel</button>
         </div>
       </div>
@@ -62,11 +70,19 @@ const Profile = () => {
     const subs = JSON.parse(localStorage.getItem('subscriptions') || '[]');
     setSubscriptions(subs);
     setSubscribedEvents(list.filter(e => subs.includes(e.id)));
+
+    // default active tab: approvals if user can approve, otherwise roles
+    const storedRole = (localStorage.getItem('role') || (storedUser && storedUser.role) || '').toString().toLowerCase();
+    const canApproveLocal = ['cr','coordinator','moderator'].includes(storedRole);
+    setActiveTab(canApproveLocal ? 'approvals' : 'roles');
   }, []);
 
-  const role = localStorage.getItem('role') || profile.role || '';
+  // normalize role to lowercase to avoid case mismatches from storage
+  const role = (localStorage.getItem('role') || profile.role || '').toString().toLowerCase();
   const canApprove = ['cr','coordinator','moderator'].includes(role);
-  const isAdmin = ['cr','clubRep'].includes(role);
+  // representative roles that are allowed to transfer roles
+  const repRoles = ['cr','clubrep','collegerep'];
+  const isRep = repRoles.includes(role);
 
   // profile is displayed on the left card; editing removed for modular UI
 
@@ -85,19 +101,23 @@ const Profile = () => {
   const openTransfer = (email) => {
     // pretend to send OTP and create a pending transfer record in localStorage
     const transfers = JSON.parse(localStorage.getItem('roleTransfers') || '[]');
-    transfers.push({ from: profile.email, to: email, at: new Date().toISOString(), otp: '123456' });
+    // include the role being transferred for clarity
+    transfers.push({ from: profile.email, to: email, at: new Date().toISOString(), otp: '123456', role: role });
     localStorage.setItem('roleTransfers', JSON.stringify(transfers));
     setShowTransfer(false);
     alert('Transfer initiated (OTP: 123456) - for demo only');
   };
 
-  const defineRole = (otp) => {
+  const defineRole = (otp, selectedRole) => {
     // verify OTP against transfers
     const transfers = JSON.parse(localStorage.getItem('roleTransfers') || '[]');
     const match = transfers.find(t => t.to === profile.email && t.otp === otp);
     if (match) {
-      localStorage.setItem('role', 'cr');
-      alert('Role defined: cr');
+      // only allow one of the representative roles to be defined here
+      const allowed = ['cr','clubrep','collegerep'];
+      const finalRole = allowed.includes((selectedRole || '').toString().toLowerCase()) ? selectedRole : match.role || 'cr';
+      localStorage.setItem('role', finalRole);
+      alert(`Role defined: ${finalRole}`);
       setShowDefine(false);
     } else alert('Invalid OTP');
   };
@@ -111,7 +131,19 @@ const Profile = () => {
             <h3 style={{margin:0}}>{profile.name || 'Unnamed'}</h3>
             <div style={{opacity:0.8, marginTop:4}}>{profile.email || '—'}</div>
             {role && <div className="badge-red" style={{marginTop:8, display:'inline-block'}}>{role}</div>}
-            
+            {/* Persistent role action buttons - always visible in profile card */}
+            <div style={{marginTop:16, display:'flex', gap:8}}>
+              <button
+                className="btn"
+                onClick={() => isRep ? setShowTransfer(true) : null}
+                disabled={!isRep}
+                title={!isRep ? 'Only representatives can transfer roles' : 'Transfer role to another user'}
+              >
+                Transfer Role
+              </button>
+
+              <button className="btn" onClick={() => setShowDefine(true)} title="Define your role via OTP">Define Role</button>
+            </div>
           </div>
         </aside>
 
@@ -252,7 +284,16 @@ const Profile = () => {
               <div>
                 <div>Current role: <strong>{role || '—'}</strong></div>
                 <div style={{marginTop:12}}>
-                  {isAdmin && <button className="btn" onClick={() => setShowTransfer(true)}>Transfer Role</button>}
+                  {/* Always show both buttons; disable transfer if user is not a representative */}
+                  <button
+                    className="btn"
+                    onClick={() => isRep ? setShowTransfer(true) : null}
+                    style={{opacity: isRep ? 1 : 0.5}}
+                    disabled={!isRep}
+                  >
+                    Transfer Role
+                  </button>
+
                   <button className="btn" onClick={() => setShowDefine(true)} style={{marginLeft:8}}>Define Role</button>
                 </div>
 
